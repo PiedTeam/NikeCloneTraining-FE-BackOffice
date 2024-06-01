@@ -9,15 +9,10 @@
     "@stylistic",
     "import",
     "promise",
-    "jsx-a11y"
+    "jsx-a11y",
+    "react-refresh"
   ],
-  "ignorePatterns": [
-    "node_modules/",
-    "dist/",
-    "server.js",
-    "*.d.ts",
-    "*.config.ts"
-  ],
+  "ignorePatterns": ["node_modules/", "dist/", "server.js", "*.d.ts", "*.config.ts"],
   "extends": [
     // extends mean use config from devDependencies that community created or recommended
 
@@ -25,8 +20,6 @@
     "eslint:recommended", //@eslint/js (@eslint/js and eslint package in package.json is the same thing)
 
     // PLUGIN
-    // prettier
-    // "plugin:prettier/recommended", //eslint-PLUGIN-prettier //disable because focus on new @stylistic/eslint-plugin
 
     // javascript
     "plugin:promise/recommended", //eslint-plugin-promise
@@ -48,9 +41,10 @@
     "plugin:react/jsx-runtime", //eslint-plugin-react
     "plugin:react-hooks/recommended", //eslint-plugin-react-hooks
 
-    // THIS MUST BE LAST
+    // prettier THIS MUST BE LAST
+    // "plugin:prettier/recommended", //eslint-PLUGIN-prettier //disable because focus on new @stylistic/eslint-plugin
     "prettier" //eslint-CONFIG-prettier (turn off eslint **rules** that conflict with prettier), turn on prettier/prettier rules
-    //eslint-CONFIG-prettier use in "check-conflict-prettier-eslint" in package.json
+    //eslint-CONFIG-prettier is used in "check-conflict-prettier-eslint" in package.json
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -67,16 +61,9 @@
     "require-await": "error",
     "eqeqeq": "error",
 
-    // plugin
-    "import/no-unresolved": "error", //eslint-plugin-import and eslint-import-resolver-typescript
-
-    // typescript
+    // eslint stylistic
+    "@stylistic/quotes": ["error", "double"],
     "@stylistic/jsx-one-expression-per-line": "off",
-    "@typescript-eslint/no-floating-promises": "off",
-    "@typescript-eslint/explicit-function-return-type": "error",
-    "@typescript-eslint/explicit-module-boundary-types": "error",
-    "@typescript-eslint/array-type": "error",
-    "@typescript-eslint/no-unused-vars": "warn",
     "@stylistic/semi": ["error", "always"],
     "@stylistic/arrow-parens": ["error", "always"],
     "@stylistic/brace-style": ["error", "1tbs", { "allowSingleLine": true }],
@@ -88,7 +75,18 @@
       }
     ],
 
+    // plugin
+    "import/no-unresolved": "error", //eslint-plugin-import and eslint-import-resolver-typescript
+
+    // typescript
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "error",
+    "@typescript-eslint/array-type": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
+
     // react
+    "react-refresh/only-export-components": "warn", //eslint-plugin-react-refresh
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn", //check useEffect
     "react/jsx-no-target-blank": "warn",
@@ -115,10 +113,10 @@
       "version": "detect"
     },
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"] // eslint-plugin-import and eslint-import-resolver-typescript
+      "@typescript-eslint/parser": [".ts", ".tsx"] //eslint-plugin-import and eslint-import-resolver-typescript
     },
     "import/resolver": {
-      // eslint-plugin-import and eslint-import-resolver-typescript
+      //eslint-plugin-import and eslint-import-resolver-typescript
       "typescript": true,
       "node": true
     }
