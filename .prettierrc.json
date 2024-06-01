@@ -5,7 +5,7 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "arrowParens": "always",
-  "endOfLine": "auto",
+  "endOfLine": "lf",
   "useTabs": false,
   "semi": true,
   "singleQuote": false,

@@ -13,6 +13,7 @@
     "lint-staged": "lint-staged",
     "prettier:check": "prettier --check ./src/**/*.{tsx,ts,js,jsx} --cache",
     "prettier:fix": "prettier --write ./src/**/*.{tsx,ts,js,jsx} --cache",
+    "prettier:fix-all": "prettier --write . --cache",
     "eslint:fix": "eslint --fix ./src --ext .ts,.tsx,.js,.jsx --max-warnings 0",
     "eslint:check": "eslint ./src --ext .ts,.tsx,.js,.jsx --report-unused-disable-directives --max-warnings 0",
     "eslint:check-allow-warning": "eslint --quiet ./src --ext .ts,.tsx,.js,.jsx",
