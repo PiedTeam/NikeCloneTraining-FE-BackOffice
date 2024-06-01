@@ -16,6 +16,7 @@
     "prettier:fix-all": "prettier --write . --cache",
     "eslint:fix": "eslint --fix ./src --ext .ts,.tsx,.js,.jsx --max-warnings 0",
     "eslint:check": "eslint ./src --ext .ts,.tsx,.js,.jsx --report-unused-disable-directives --max-warnings 0",
+    "eslint:debug": "eslint ./src --debug --ext .ts,.tsx,.js,.jsx --max-warnings 0",
     "eslint:check-allow-warning": "eslint --quiet ./src --ext .ts,.tsx,.js,.jsx",
     "check-conflict-prettier-eslint": "npx eslint-config-prettier src/App.tsx --print-config",
     "check-types": "tsc --noemit"
@@ -56,6 +57,7 @@
     "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "eslint-plugin-tailwindcss": "^3.17.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.5",
     "postcss": "^8.4.38",

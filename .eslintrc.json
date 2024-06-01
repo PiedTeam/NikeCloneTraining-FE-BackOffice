@@ -41,6 +41,8 @@
     "plugin:react/jsx-runtime", //eslint-plugin-react
     "plugin:react-hooks/recommended", //eslint-plugin-react-hooks
 
+    // tailwindcss
+    "plugin:tailwindcss/recommended", //eslint-plugin-tailwindcss
     // prettier THIS MUST BE LAST
     // "plugin:prettier/recommended", //eslint-PLUGIN-prettier //disable because focus on new @stylistic/eslint-plugin
     "prettier" //eslint-CONFIG-prettier (turn off eslint **rules** that conflict with prettier), turn on prettier/prettier rules
