@@ -12,7 +12,13 @@
     "jsx-a11y",
     "react-refresh"
   ],
-  "ignorePatterns": ["node_modules/", "dist/", "server.js", "*.d.ts", "*.config.ts"],
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/",
+    "server.js",
+    "*.d.ts",
+    "*.config.ts"
+  ],
   "extends": [
     // extends mean use config from devDependencies that community created or recommended
 
