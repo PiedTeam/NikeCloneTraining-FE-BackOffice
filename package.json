@@ -21,7 +21,7 @@
     "check-types": "tsc --noemit"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
+    "*.*": [
       "yarn run prettier:fix"
     ]
   },

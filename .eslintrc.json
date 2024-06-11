@@ -66,6 +66,7 @@
   "rules": {
     // rule that override the extends config above
     // normal code
+    "no-console": "error",
     "require-await": "error",
     "eqeqeq": "error",
 
