@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "naikila_fe_main",
+  "name": "naikila_fe_backoffice",
   "private": true,
   "version": "1.0.0",
   "type": "module",
