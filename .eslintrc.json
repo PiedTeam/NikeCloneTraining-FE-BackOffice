@@ -1,12 +1,12 @@
 {
   "env": { "node": true, "browser": true },
   "$schema": "https://json.schemastore.org/eslintrc",
-  "root": true,
+  // "root": true,
   "plugins": [
     "react",
     "prettier",
     "@typescript-eslint",
-    "@stylistic",
+    // "@stylistic",
     "import",
     "promise",
     "jsx-a11y",
@@ -39,7 +39,7 @@
     "plugin:import/typescript", //eslint-plugin-import and eslint-import-resolver-typescript
 
     // eslint stylistic
-    "plugin:@stylistic/recommended-extends", //@stylistic/eslint-plugin
+    // "plugin:@stylistic/recommended-extends", //@stylistic/eslint-plugin
 
     // react
     "plugin:jsx-a11y/recommended", //eslint-plugin-jsx-a11y
@@ -50,7 +50,7 @@
     // tailwindcss
     "plugin:tailwindcss/recommended", //eslint-plugin-tailwindcss
     // prettier THIS MUST BE LAST
-    // "plugin:prettier/recommended", //eslint-PLUGIN-prettier //disable because focus on new @stylistic/eslint-plugin
+    "plugin:prettier/recommended", //eslint-PLUGIN-prettier //disable because focus on new @stylistic/eslint-plugin
     "prettier" //eslint-CONFIG-prettier (turn off eslint **rules** that conflict with prettier), turn on prettier/prettier rules
     //eslint-CONFIG-prettier is used in "check-conflict-prettier-eslint" in package.json
   ],
@@ -69,20 +69,21 @@
     "no-console": "error",
     "require-await": "error",
     "eqeqeq": "error",
+    "no-nested-ternary": "error",
 
     // eslint stylistic
-    "@stylistic/quotes": ["error", "double"],
-    "@stylistic/jsx-one-expression-per-line": "off",
-    "@stylistic/semi": ["error", "always"],
-    "@stylistic/arrow-parens": ["error", "always"],
-    "@stylistic/brace-style": ["error", "1tbs", { "allowSingleLine": true }],
-    "@stylistic/member-delimiter-style": [
-      "error",
-      {
-        "multiline": { "delimiter": "semi", "requireLast": true },
-        "singleline": { "delimiter": "semi", "requireLast": false }
-      }
-    ],
+    // "@stylistic/quotes": ["error", "double"],
+    // "@stylistic/jsx-one-expression-per-line": "off",
+    // "@stylistic/semi": ["error", "always"],
+    // "@stylistic/arrow-parens": ["error", "always"],
+    // "@stylistic/brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+    // "@stylistic/member-delimiter-style": [
+    //   "error",
+    //   {
+    //     "multiline": { "delimiter": "semi", "requireLast": true },
+    //     "singleline": { "delimiter": "semi", "requireLast": false }
+    //   }
+    // ],
 
     // plugin
     "import/no-unresolved": "error", //eslint-plugin-import and eslint-import-resolver-typescript
@@ -121,13 +122,15 @@
     "react": {
       "version": "detect"
     },
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"] //eslint-plugin-import and eslint-import-resolver-typescript
-    },
     "import/resolver": {
       //eslint-plugin-import and eslint-import-resolver-typescript
-      "typescript": true,
-      "node": true
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
     }
   }
 }
