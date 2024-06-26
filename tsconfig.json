@@ -1,13 +1,34 @@
-// this tsconfig is for src folder === root project
+// this tsconfig is for SRC FOLDER === mean this is config for client side (browser) to run
+
+// ******* USE THIS WHEN DEVELOPMENT *********
 {
   "schema": "https://json.schemastore.org/tsconfig",
   "extends": "@tsconfig/vite-react/tsconfig.json",
   "compilerOptions": {
     "sourceMap": true, //source map for debugging
     "noUnusedLocals": false, //false so that warnings can still be okay
-    "noUnusedParameters": false //false so that warnings can still be okay
+    "noUnusedParameters": false, //false so that warnings can still be okay
+    "baseUrl": "./src",
+    "paths": {
+      "@apis/*": ["apis/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@contexts/*": ["contexts/*"],
+      "@hooks/*": ["hooks/*"],
+      "@layout/*": ["layout/*"],
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
+      "@services/*": ["services/*"],
+      "@stores/*": ["stores/*"],
+      "@utils/*": ["utils/*"],
+      "@public/*": ["../public/*"],
+      "@common/*": ["common/*"],
+      "@provider/*": ["provider/*"],
+      "@routes/*": ["routes/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["./src", "src", "src/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   // reference simple term mean extend tsconfig from another tsconfig
   "references": [{ "path": "./tsconfig.node.json" }]
 }
