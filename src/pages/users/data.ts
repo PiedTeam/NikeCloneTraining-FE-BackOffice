@@ -9,7 +9,7 @@ export const columns = [
 export const statusOptions = [
   { name: "Active", uid: "active" },
   { name: "Paused", uid: "paused" },
-  { name: "Block", uid: "block" },
+  { name: "Block", uid: "blocked" },
 ];
 export const users = [
   {

@@ -49,7 +49,6 @@ export default function Account(): JSX.Element {
   const [page, setPage] = React.useState(1);
   const hasSearchFilter = Boolean(filterValue);
   const hasFilterRole = Boolean(filterRole);
-
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...users];
     if (hasFilterRole) {
@@ -69,6 +68,7 @@ export default function Account(): JSX.Element {
       statusFilter !== "all" &&
       Array.from(statusFilter).length !== statusOptions.length
     ) {
+      setPage(1);
       filteredUsers = filteredUsers.filter((user) =>
         Array.from(statusFilter).includes(user.status),
       );
