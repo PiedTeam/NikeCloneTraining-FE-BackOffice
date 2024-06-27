@@ -1,8 +1,9 @@
 import { NextUIProvider } from "@nextui-org/react";
 import "./styles/index.scss";
 import { ReactElement } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Main from "./pages/users/Main";
+import Account from "@pages/users/Account";
 
 function App(): ReactElement {
   return (
@@ -16,6 +17,8 @@ function App(): ReactElement {
             </div>
           }
         >
+          <Route index element={<Navigate to="/dashboard/user" />} />
+          <Route path="user" element={<Account />} />
           <Route
             path="sub1"
             element={
