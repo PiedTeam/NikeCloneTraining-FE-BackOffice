@@ -6,7 +6,8 @@ import { FaDiagramProject } from "react-icons/fa6";
 import { SiPowerpages } from "react-icons/si";
 import { FaUserAlt } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
-import { Card, CardHeader, Image } from "@nextui-org/react";
+import { Button, Card, CardHeader, Image } from "@nextui-org/react";
+import { IoLogOut } from "react-icons/io5";
 
 interface SideBarProps {
   CustomComponent?: ReactNode;
@@ -79,9 +80,9 @@ const SideBar: FC<SideBarProps> = () => {
   };
 
   return (
-    <div className={`mr-16 ${open ? "mr-36 w-96" : "w-28"} duration-300`}>
+    <div className={`mr-16 flex ${open ? "mr-36 w-96" : "w-28"} duration-300`}>
       <div
-        className={`fixed h-screen bg-slate-50 p-5 pt-8 ${open ? "w-96 p-8" : "w-28"} duration-300`}
+        className={`fixed flex h-screen flex-col justify-between bg-slate-50 p-5 pt-8 ${open ? "w-96 p-8" : "w-28"} duration-300`}
       >
         <BsArrowLeftShort
           className={`absolute -right-8 top-9 cursor-pointer rounded-full border bg-white text-5xl font-black ${!open && "rotate-180"}`}
@@ -113,7 +114,7 @@ const SideBar: FC<SideBarProps> = () => {
           </CardHeader>
         </Card>
 
-        <ul className="mt-8">
+        <ul className="mt-8 h-[500px]">
           {Menu.map((item, index) => (
             <div key={index} className={`${!open && "w-16"}`}>
               {item.spacing ? (
@@ -164,6 +165,21 @@ const SideBar: FC<SideBarProps> = () => {
             </div>
           ))}
         </ul>
+        <div className="flex justify-center">
+          <Button color="danger" variant="bordered" className={` `}>
+            <Link
+              to={"cc"}
+              className={`grid cursor-pointer grid-cols-sidebar items-center text-sm text-black ${!open ? "gap-0" : "gap-4"} `}
+            >
+              <IoLogOut className="text-3xl" />
+              <b
+                className={`flex-1 text-custom font-bold ${!open && "hidden"}`}
+              >
+                Logout
+              </b>
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );
