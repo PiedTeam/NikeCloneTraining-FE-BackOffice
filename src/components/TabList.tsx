@@ -8,16 +8,15 @@ const TabList: FC<TabListProps> = ({ onRoleSelect }): JSX.Element => {
     onRoleSelect(key.toString());
   };
   return (
-    <div className="">
-      <Tabs
-        aria-label="Options"
-        onSelectionChange={(key: React.Key) => handleSelectionChange(key)}
-      >
-        <Tab key="" title="All" />
-        <Tab key="Designer" title="Employee" />
-        <Tab key="CEO" title="Ceo" />
-      </Tabs>
-    </div>
+    <Tabs
+      aria-label="Options"
+      size="md"
+      onSelectionChange={(key: React.Key) => handleSelectionChange(key)}
+    >
+      <Tab key="" title="All" />
+      <Tab key="Designer" title="Employee" />
+      <Tab key="CEO" title="Ceo" />
+    </Tabs>
   );
 };
 export default TabList;

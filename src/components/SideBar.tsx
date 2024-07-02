@@ -92,19 +92,20 @@ const SideBar: FC<SideBarProps> = () => {
           <CardHeader className={`flex gap-3 ${!open && "gap-0 p-0"}`}>
             <Image
               alt="nextui logo"
+              disableSkeleton={true}
               radius="sm"
               src="https://i.pravatar.cc/150?u=a048581f4e29026701d"
-              className={`${!open && "w-16"}`}
+              className={`w-20 ${!open && "w-16"}`}
             />
             <div className="flex flex-col">
               <p className={` ${!open && "hidden scale-0"}`}>Trần Ngọc Tiến</p>
               <p
-                className={`text-xs font-bold text-red-600 ${!open && "hidden scale-0"}`}
+                className={`text-xs font-bold text-red-600 ${!open && "hidden scale-0"} duration-1000`}
               >
                 Admin
               </p>
               <p
-                className={`text-xs text-default-500 ${!open && "hidden scale-0"}`}
+                className={`text-xs text-default-500 ${!open && "hidden scale-0"} duration-300`}
               >
                 <i>tranngoctien29112003@gmail.com</i>
               </p>
@@ -114,7 +115,7 @@ const SideBar: FC<SideBarProps> = () => {
 
         <ul className="mt-8">
           {Menu.map((item, index) => (
-            <div key={index} className="w-32">
+            <div key={index} className={`${!open && "w-16"}`}>
               {item.spacing ? (
                 <hr
                   className={`${open ? "mt-2 w-72 font-extrabold" : "w-16"}`}
@@ -124,11 +125,15 @@ const SideBar: FC<SideBarProps> = () => {
               )}
               <li
                 key={index}
-                className={`w-72 ${open && path.includes(item.link) ? "rounded-md bg-neutral-300 text-black" : ""} mt-2 grid cursor-pointer grid-cols-sidebar items-center justify-between gap-x-4 rounded-md p-2 px-5 text-sm hover:bg-neutral-300`}
+                className={` ${path.includes(item.link) ? "my-2 rounded-md bg-neutral-300 text-black" : ""} mt-2 grid cursor-pointer grid-cols-sidebar items-center gap-x-4 rounded-md p-2 px-5 text-sm hover:bg-neutral-300`}
               >
                 <div>
                   {" "}
-                  <span className="text-xl">{item.icon}</span>{" "}
+                  <span
+                    className={`text-xl ${path.includes(item.link) && "bg-neutral-300"} `}
+                  >
+                    {item.icon}
+                  </span>{" "}
                 </div>
 
                 <div>
@@ -144,7 +149,7 @@ const SideBar: FC<SideBarProps> = () => {
                 {item.submenu && open && (
                   <div>
                     <BsChevronDown
-                      className={`ml-14 text-2xl ${openSubMenus.includes(index) ? "rotate-180" : ""}`}
+                      className={`m-0 ml-24 text-2xl ${openSubMenus.includes(index) ? "rotate-180" : ""}`}
                       onClick={() => toggleSubMenu(index)}
                     />
                   </div>

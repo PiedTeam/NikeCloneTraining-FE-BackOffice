@@ -9,21 +9,15 @@ import {
   Input,
   User,
   Chip,
-  Dropdown,
   Pagination,
   Selection,
   ChipProps,
-  DropdownTrigger,
-  Button,
-  DropdownMenu,
-  DropdownItem,
-  Card,
+  Select,
+  SelectItem,
 } from "@nextui-org/react";
 import { SearchIcon } from "../../components/SearchIcon";
 import { users, columns, statusOptions } from "./data";
 import TabList from "../../components/TabList";
-import { ChevronDownIcon } from "../../components/ChevronDownIcon";
-import { capitalize } from "../../utils/utils";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -36,21 +30,48 @@ export interface TableListProps {
 }
 
 type User = (typeof users)[0];
-
+const perRow = [
+  {
+    key: "5",
+    count: "5",
+  },
+  {
+    key: "20",
+    count: "20",
+  },
+  {
+    key: "50",
+    count: "50",
+  },
+  {
+    key: 100,
+    count: 100,
+  },
+];
 export default function Account(): JSX.Element {
   const [filterRole, setFilterRole] = React.useState("");
   const [filterValue, setFilterValue] = React.useState("");
-
-  const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [pages, setPages] = React.useState(
-    Math.ceil(users.length / rowsPerPage),
+  const [statusFilter, setStatusFilter] = React.useState<Selection>(
+    new Set(["all"]),
   );
+  const [rowsPerPage, setRowsPerPage] = React.useState<string>("5");
+
+  const [pages, setPages] = React.useState(
+    Math.ceil(users.length / parseInt(rowsPerPage)),
+  );
+  const handleSelectionStatusChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ): void => {
+    setStatusFilter(new Set(e.target.value.split(",")));
+  };
+
   const [page, setPage] = React.useState(1);
   const hasSearchFilter = Boolean(filterValue);
   const hasFilterRole = Boolean(filterRole);
+
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...users];
+
     if (hasFilterRole) {
       filteredUsers = users.filter((user) =>
         user.role.toLowerCase().includes(filterRole.toLowerCase()),
@@ -65,7 +86,7 @@ export default function Account(): JSX.Element {
       );
     }
     if (
-      statusFilter !== "all" &&
+      !Array.from(statusFilter).includes("all") &&
       Array.from(statusFilter).length !== statusOptions.length
     ) {
       setPage(1);
@@ -73,15 +94,18 @@ export default function Account(): JSX.Element {
         Array.from(statusFilter).includes(user.status),
       );
     }
+
     return filteredUsers;
   }, [hasFilterRole, hasSearchFilter, filterRole, filterValue, statusFilter]);
-
   const items = React.useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-    setPages(Math.ceil(filteredItems.length / rowsPerPage));
+    const start = (page - 1) * parseInt(rowsPerPage);
+    const end = start + parseInt(rowsPerPage);
+    setPages(Math.ceil(filteredItems.length / parseInt(rowsPerPage)));
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
+  const total = React.useMemo(() => {
+    return filteredItems.length;
+  }, [filteredItems]);
 
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
@@ -136,10 +160,17 @@ export default function Account(): JSX.Element {
         return cellValue;
     }
   }, []);
+  // const onRowsPerPageChange = React.useCallback(
+  //   (e: Selection) => {
+  //     console.log(e);
+
+  //     setPage(1);
+  //   },
+  //   [],
+  // );
   const onRowsPerPageChange = React.useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setRowsPerPage(Number(e.target.value));
-      setPage(1);
+      setRowsPerPage(e.target.value);
     },
     [],
   );
@@ -156,11 +187,25 @@ export default function Account(): JSX.Element {
   const topContent = React.useMemo(() => {
     return (
       <div className="">
-        <div className="flex flex-col gap-4 pr-8">
+        <div className="flex flex-col gap-4">
           <div className="flex items-end justify-between">
-            <div className="flex w-1/3 justify-between">
+            <div className="flex w-5/12 justify-between">
               <TabList onRoleSelect={setFilterRole} />
-              <Dropdown className="ml-16">
+              <div className="w-32 gap-2">
+                <Select
+                  size="sm"
+                  label="Status"
+                  selectionMode="multiple"
+                  selectedKeys={statusFilter}
+                  className="max-w-xs"
+                  onChange={handleSelectionStatusChange}
+                >
+                  {statusOptions.map((status) => (
+                    <SelectItem key={status.uid}>{status.name}</SelectItem>
+                  ))}
+                </Select>
+              </div>
+              {/* <Dropdown className="ml-16">
                 <DropdownTrigger className="hidden sm:flex">
                   <Button
                     endContent={<ChevronDownIcon className="text-small" />}
@@ -184,13 +229,29 @@ export default function Account(): JSX.Element {
                     </DropdownItem>
                   ))}
                 </DropdownMenu>
-              </Dropdown>
+              </Dropdown> */}
             </div>
+            <Select
+              selectedKeys={[rowsPerPage]}
+              size="sm"
+              label="Users per row"
+              className="ml-2 w-32 bg-transparent text-default-600 outline-none"
+              onChange={onRowsPerPageChange}
+            >
+              {perRow.map((item) => (
+                <SelectItem key={item.key}>{item.count.toString()}</SelectItem>
+              ))}
+            </Select>
+          </div>
+          <div className="flex justify-between gap-3">
+            <span className="flex text-small text-default-400">
+              Total {total} users
+            </span>
 
             <Input
               isClearable
               classNames={{
-                base: "w-full sm:max-w-[44%] pt-2",
+                base: "w-full h-full sm:max-w-[44%] ",
                 inputWrapper: "border-1",
               }}
               placeholder="Search..."
@@ -201,35 +262,31 @@ export default function Account(): JSX.Element {
               onClear={() => setFilterValue("")}
               onValueChange={onSearchChange}
             />
-          </div>
-          <div className="flex justify-between gap-3">
-            <span className="flex text-small text-default-400">
-              Total {users.length} users
-            </span>
-            <Card>
-              <div className="flex items-center justify-between p-2">
-                <label className="flex items-center text-sm text-default-600">
-                  Users per page:
-                  <select
-                    className="ml-2 bg-transparent text-default-600 outline-none"
+
+            {/* <select
+                    className="ml-2 bg-transparent text-default-600 outline-none "
                     onChange={onRowsPerPageChange}
                   >
                     <option value="5">
-                      <p className="text-xl font-bold"> 5</p>
+                      <p className="text-xl font-bold "> 5</p>
                     </option>
 
-                    <option value="20">20</option>
+                    <option className="p-96" value="20">20</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
-                  </select>
-                </label>
-              </div>
-            </Card>
+                  </select> */}
           </div>
         </div>
       </div>
     );
-  }, [filterValue, statusFilter, onSearchChange, onRowsPerPageChange]);
+  }, [
+    filterValue,
+    statusFilter,
+    onSearchChange,
+    total,
+    rowsPerPage,
+    onRowsPerPageChange,
+  ]);
 
   const bottomContent = React.useMemo(() => {
     return (

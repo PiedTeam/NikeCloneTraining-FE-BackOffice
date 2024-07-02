@@ -7,6 +7,7 @@ export const columns = [
   { name: "STATUS", uid: "status", sortable: true },
 ];
 export const statusOptions = [
+  { name: "All", uid: "all" },
   { name: "Active", uid: "active" },
   { name: "Paused", uid: "paused" },
   { name: "Block", uid: "blocked" },
