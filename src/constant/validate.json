@@ -1,0 +1,4 @@
+{
+  "onlyCharacter": "/^[a-zA-Z]+$",
+  "onlyNumber": "/^[0-9]+$/"
+}

@@ -23,6 +23,10 @@ const config: Config = {
       gridTemplateColumns: {
         dashboard: "20% 80%",
         sidebar: "20% 20% 54% ",
+        infomation: "25% 66% ",
+      },
+      gridTemplateRows: {
+        dashboard: "1fr 0.4fr",
       },
     },
   },

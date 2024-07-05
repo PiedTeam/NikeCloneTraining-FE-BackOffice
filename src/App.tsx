@@ -4,6 +4,7 @@ import { ReactElement } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Main from "./pages/users/Main";
 import Account from "@pages/users/Account";
+import CreateEmployee from "@pages/createEmployee/CreateEmployee";
 
 function App(): ReactElement {
   return (
@@ -50,6 +51,14 @@ function App(): ReactElement {
             }
           />
         </Route>
+        <Route
+          path="/create-employee"
+          element={
+            <div>
+              <CreateEmployee />
+            </div>
+          }
+        />
       </Routes>
     </NextUIProvider>
   );
