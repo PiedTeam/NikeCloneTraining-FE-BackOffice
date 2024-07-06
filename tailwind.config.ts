@@ -9,6 +9,13 @@ const config: Config = {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
+  theme: {
+    extend: {
+      gridTemplateRows: {
+        detail: "10px 10px 1fr",
+      },
+    },
+  },
   plugins: [
     nextui({
       prefix: "nextui",
